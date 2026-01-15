@@ -1,11 +1,23 @@
 import Link from "next/link";
 
-export default function PracticeLayout({ children }: { children: React.ReactNode }) {
+export default function PracticeLayout({
+	children,
+	marketingSlot,
+	salesSlot,
+}: {
+	children: React.ReactNode;
+	marketingSlot: React.ReactNode;
+	salesSlot: React.ReactNode;
+}) {
 	return (
 		<div>
 			<nav className='flex gap-10 m-8'>
 				<Link href='/development' className='hover:underline'>
 					Development
+				</Link>
+
+				<Link href='/test' className='hover:underline'>
+					Test
 				</Link>
 
 				<Link href='/marketing' className='hover:underline'>
@@ -20,6 +32,10 @@ export default function PracticeLayout({ children }: { children: React.ReactNode
 					Sales
 				</Link>
 			</nav>
+			<div className='flex gap-5'>
+				{marketingSlot}
+				{salesSlot}
+			</div>
 			{children}
 		</div>
 	);
