@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export default function RootLayout() {
+export default async function RootLayout() {
 	return (
 		<div>
 			<Button variant='outline'>Click Here</Button>
