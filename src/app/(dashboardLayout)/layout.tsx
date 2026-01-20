@@ -18,7 +18,7 @@ export default function DashboardLayout({
 	user: React.ReactNode;
 }) {
 	const userInfo = {
-		role: "user",
+		role: "admin",
 	};
 
 	return (
