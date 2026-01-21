@@ -9,6 +9,7 @@ export interface BlogPost {
 		comments: number;
 	};
 	isFeatured?: boolean;
+	createdAt?: string;
 }
 
 export interface GetBlogsParams {

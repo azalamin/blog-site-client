@@ -5,7 +5,7 @@ import { BlogPost } from "@/types";
 export default async function HomePage() {
 	const data = await blogService.getBlogPosts(
 		{
-			isFeatured: false,
+			// isFeatured: false,
 			// search: "asdffa",
 		},
 		{
