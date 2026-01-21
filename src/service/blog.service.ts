@@ -1,4 +1,6 @@
 import { env } from "@/env";
+import { GetBlogsParams } from "@/types";
+import { BlogServiceOptions } from "@/types/blog.types";
 
 const API_URL = env.API_URL;
 
@@ -7,11 +9,28 @@ const API_URL = env.API_URL;
 //* next: { revalidate: 10 } : ISR --> Incremental Static Regeneration (Mix between static and dynamic page)
 
 export const blogService = {
-	getBlogPosts: async function () {
+	getBlogPosts: async function (params?: GetBlogsParams, options?: BlogServiceOptions) {
 		try {
-			const res = await fetch(`${API_URL}/posts`, {
-				next: { revalidate: 10 },
-			});
+			const url = new URL(`${API_URL}/posts`);
+			if (params) {
+				Object.entries(params).forEach(([key, value]) => {
+					if (value !== undefined && value !== null && value !== "") {
+						url.searchParams.append(key, value);
+					}
+				});
+			}
+
+			const config: RequestInit = {};
+
+			if (options?.cache) {
+				config.cache = options.cache;
+			}
+
+			if (options?.revalidate) {
+				config.next = { revalidate: options.revalidate };
+			}
+
+			const res = await fetch(url.toString(), config);
 
 			const data = await res.json();
 

@@ -3,7 +3,16 @@ import { blogService } from "@/service/blog.service";
 import { BlogPost } from "@/types";
 
 export default async function HomePage() {
-	const data = await blogService.getBlogPosts();
+	const data = await blogService.getBlogPosts(
+		{
+			isFeatured: false,
+			// search: "asdffa",
+		},
+		{
+			cache: "no-store",
+			// revalidate: 10,
+		},
+	);
 
 	return (
 		<div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 px-20 pt-5'>

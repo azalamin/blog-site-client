@@ -10,3 +10,12 @@ export interface BlogPost {
 	};
 	isFeatured?: boolean;
 }
+
+export interface GetBlogsParams {
+	isFeatured?: boolean;
+	search?: string;
+}
+export interface BlogServiceOptions {
+	cache?: RequestCache;
+	revalidate?: number;
+}
