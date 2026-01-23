@@ -34,9 +34,11 @@ export const blogService = {
 
 			const data = await res.json();
 
-			if (data.success) {
-				return { data: data?.data, error: null };
+			if (!data.success) {
+				return { data: null, error: { message: data.message ?? "Failed" } };
 			}
+
+			return { data: data?.data, error: null };
 		} catch (err) {
 			return { data: null, error: { message: "Something went wrong!" } };
 		}
