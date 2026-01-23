@@ -8,9 +8,12 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
+import Link from "next/link";
+import { toast } from "sonner";
 
 import * as z from "zod";
 
@@ -31,9 +34,29 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
 			onSubmit: formSchema,
 		},
 		onSubmit: async ({ value }) => {
-			console.log(value);
+			const toastId = toast.loading("Creating user!");
+
+			try {
+				const { data, error } = await authClient.signUp.email(value);
+				if (error) {
+					toast.error(error.message, { id: toastId });
+					return;
+				}
+
+				toast.success("User Created Successfully!", { id: toastId });
+			} catch (err) {
+				toast.error("Something went wrong, please try again.", { id: toastId });
+			}
 		},
 	});
+
+	const handleGoogleLogin = async () => {
+		const data = await authClient.signIn.social({
+			provider: "google",
+			callbackURL: "http://localhost:3000",
+		});
+	};
+
 	return (
 		<Card {...props}>
 			<CardHeader>
@@ -109,10 +132,21 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
 					</FieldGroup>
 				</form>
 			</CardContent>
-			<CardFooter className='flex justify-end'>
-				<Button form='register-form' type='submit'>
+			<CardFooter className='flex flex-col gap-5 justify-end'>
+				<Button form='register-form' type='submit' className='w-full'>
 					Submit
 				</Button>
+				<Button
+					onClick={() => handleGoogleLogin()}
+					variant='outline'
+					type='button'
+					className='w-full'
+				>
+					Continue with Google
+				</Button>
+				<FieldDescription className='px-6 text-center'>
+					Already have an account? <Link href='/login'>Login</Link>
+				</FieldDescription>
 			</CardFooter>
 		</Card>
 	);
