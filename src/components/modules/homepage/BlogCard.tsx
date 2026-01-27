@@ -41,8 +41,8 @@ export default function BlogCard({ post }: { post: BlogPost }) {
 
 				{post.tags?.length ? (
 					<CardContent className='flex flex-wrap gap-2'>
-						{post.tags.map(tag => (
-							<Badge key={tag} variant='secondary'>
+						{post.tags.map((tag, index) => (
+							<Badge key={index} variant='secondary'>
 								#{tag}
 							</Badge>
 						))}

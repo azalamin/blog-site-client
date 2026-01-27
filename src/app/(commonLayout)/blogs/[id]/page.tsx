@@ -8,7 +8,7 @@ import { Eye, MessageCircle, Star } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
 	const data = await blogService.getBlogPosts();
