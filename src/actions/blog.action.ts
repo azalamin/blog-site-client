@@ -9,6 +9,7 @@ export const getBlogs = async () => {
 };
 
 export const createBlogPost = async (blogData: BlogData) => {
+	const res = await blogService.createBlogPost(blogData);
 	updateTag("blogPosts");
-	return await blogService.createBlogPost(blogData);
+	return res;
 };

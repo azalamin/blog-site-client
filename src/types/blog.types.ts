@@ -15,6 +15,7 @@ export interface BlogPost {
 export interface GetBlogsParams {
 	isFeatured?: boolean;
 	search?: string;
+	page?: string;
 }
 export interface BlogServiceOptions {
 	cache?: RequestCache;

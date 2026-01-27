@@ -67,7 +67,7 @@ export default function CreateBlogFormClient() {
 	});
 
 	return (
-		<Card className='max-w-2xl mx-auto'>
+		<Card className='max-w-2xl mx-auto w-full'>
 			<CardHeader>
 				<CardTitle>Create Blog</CardTitle>
 				<CardDescription>You can write your blog here</CardDescription>
