@@ -1,4 +1,4 @@
-import CreateBlogFormServer from "@/components/modules/user/createBlog/CreateBlogFormServer";
+import CreateBlogFormClient from "@/components/modules/user/createBlog/CreateBlogFormClient";
 import { blogService } from "@/service/blog.service";
 import { BlogPost } from "@/types";
 
@@ -7,7 +7,8 @@ export default async function CreateBlogUser() {
 
 	return (
 		<div>
-			<CreateBlogFormServer />
+			{/* <CreateBlogFormServer /> */}
+			<CreateBlogFormClient />
 			{data.allPost.map((item: BlogPost) => (
 				<p key={item.id}>{item.title}</p>
 			))}

@@ -20,3 +20,9 @@ export interface BlogServiceOptions {
 	cache?: RequestCache;
 	revalidate?: number;
 }
+
+export interface BlogData {
+	title: string;
+	content: string;
+	tags?: string[];
+}
