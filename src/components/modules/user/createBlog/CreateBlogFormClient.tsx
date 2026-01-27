@@ -1,5 +1,6 @@
 "use client";
 
+import { createBlogPost } from "@/actions/blog.action";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -51,6 +52,13 @@ export default function CreateBlogFormClient() {
 			};
 
 			try {
+				const res = await createBlogPost(blogData);
+
+				if (res.error) {
+					toast.error(res.error.message, { id: toastId });
+					return;
+				}
+
 				toast.success("Post Created", { id: toastId });
 			} catch (error) {
 				toast.error("Something Went Wrong", { id: toastId });
